@@ -1,0 +1,1651 @@
+
+/* ---------- 1. Үндсэн хувьсагч ---------- */
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f8fafc;
+  --surface: #ffffff;
+
+  --text: #0f172a;
+  --text-2: #475569;
+  --muted: #64748b;
+
+  --line: #e2e8f0;
+  --soft: #f1f5f9;
+
+  --blue: #2563eb;
+  --blue-dark: #1d4ed8;
+  --blue-tint: #eff6ff;
+
+  --orange: #f97316;
+  --orange-dark: #ea580c;
+
+  --navy: #0b1220;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+
+  --shadow-sm:
+    0 1px 2px rgba(15, 23, 42, 0.06),
+    0 1px 3px rgba(15, 23, 42, 0.08);
+
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 20px 40px rgba(15, 23, 42, 0.14);
+
+  --header-h: 68px;
+  --container-width: 1240px;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --transition-fast: 0.2s var(--ease);
+  --transition-normal: 0.3s var(--ease);
+
+  --focus-ring: 0 0 0 4px rgba(37, 99, 235, 0.14);
+}
+
+/* ---------- 2. Суурь тохиргоо ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family:
+    Inter,
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    Roboto,
+    Arial,
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+img {
+  display: block;
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--blue);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.65);
+  outline-offset: 3px;
+}
+
+.container {
+  width: min(var(--container-width), 92%);
+  margin-inline: auto;
+}
+
+/* ---------- 3. Толгой хэсэг ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: var(--header-h);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.brand svg {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  transition: transform 0.6s var(--ease);
+}
+
+.brand:hover svg {
+  transform: rotate(90deg);
+}
+
+/* ---------- 4. Үндсэн навигаци ---------- */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.nav > li {
+  position: relative;
+}
+
+.nav > li > a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-2);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.nav > li > a:hover {
+  background: var(--soft);
+  color: var(--text);
+}
+
+.nav > li > a.active {
+  background: var(--blue-tint);
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.nav > li > a:focus-visible,
+.sub a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.has-sub > a::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-left: 5px;
+  flex-shrink: 0;
+  border-right: 1.6px solid currentColor;
+  border-bottom: 1.6px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.25s var(--ease);
+}
+
+.has-sub:hover > a::after,
+.has-sub.open > a::after {
+  transform: rotate(225deg) translate(-1px, -1px);
+}
+
+/* ---------- 5. Dropdown цэс ---------- */
+.sub {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 110;
+  min-width: 280px;
+  max-width: min(340px, 90vw);
+  padding: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(8px);
+
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-normal),
+    visibility var(--transition-fast);
+}
+
+.sub::before {
+  content: "";
+  position: absolute;
+  inset: -8px 0 auto;
+  height: 8px;
+}
+
+.has-sub:hover .sub,
+.has-sub:focus-within .sub,
+.has-sub.open .sub {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.sub a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 9px;
+  font-size: 14px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  color: var(--text-2);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    padding-left var(--transition-fast);
+}
+
+.sub a:hover {
+  background: var(--blue-tint);
+  color: var(--blue);
+  padding-left: 18px;
+}
+
+/* ---------- 6. Товчлуурууд ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
+
+  background: linear-gradient(
+    135deg,
+    var(--orange),
+    var(--orange-dark)
+  );
+  color: #fff;
+
+  border: 0;
+  border-radius: 999px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(249, 115, 22, 0.3);
+
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    filter var(--transition-fast);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(249, 115, 22, 0.4);
+  filter: brightness(1.05);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.55);
+  outline-offset: 3px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+
+  background: var(--soft);
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  font-size: 22px;
+  color: var(--text);
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.burger:hover {
+  background: var(--blue-tint);
+  border-color: var(--line);
+}
+
+/* ---------- 7. Үндсэн бүтэц ---------- */
+main {
+  min-height: 62vh;
+  padding: 48px 0 88px;
+  background: linear-gradient(#fff, var(--bg-soft) 420px);
+}
+
+.crumbs {
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.crumbs a {
+  transition: color var(--transition-fast);
+}
+
+.crumbs a:hover {
+  color: var(--blue);
+}
+
+h1 {
+  margin-bottom: 12px;
+  font-size: clamp(26px, 3.6vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+h2 {
+  margin: 32px 0 14px;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+h3 {
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+p {
+  overflow-wrap: break-word;
+}
+
+.lead {
+  max-width: 720px;
+  margin-bottom: 30px;
+  font-size: 17px;
+  color: var(--muted);
+}
+
+/* ---------- 8. Hero хэсэг ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 96px 0 110px;
+  color: #fff;
+
+  background:
+    radial-gradient(
+      900px 400px at 85% -10%,
+      rgba(56, 189, 248, 0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 360px at 5% 110%,
+      rgba(249, 115, 22, 0.25),
+      transparent 60%
+    ),
+    linear-gradient(135deg, #0b1220, #1e3a8a);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(#fff 1px, transparent 1px),
+    linear-gradient(90deg, #fff 1px, transparent 1px);
+
+  background-size: 44px 44px;
+
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent);
+  mask-image: linear-gradient(to bottom, #000, transparent);
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  max-width: 720px;
+  margin-bottom: 16px;
+  font-size: clamp(30px, 5vw, 48px);
+}
+
+.hero p {
+  max-width: 620px;
+  margin: 0 0 30px;
+  font-size: 18px;
+  color: #cbd5e1;
+}
+
+.hero .btn + .btn {
+  margin-left: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.hero .btn + .btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ---------- 9. Үзүүлэлтийн картууд ---------- */
+.stats {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+
+  margin-top: -52px;
+}
+
+.stat {
+  padding: 24px 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.stat:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat b {
+  display: block;
+  font-size: 32px;
+  line-height: 1.2;
+  color: var(--blue);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat span {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ---------- 10. Картууд ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal),
+    border-color var(--transition-normal);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: #cbd5e1;
+}
+
+.thumb {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  height: 196px;
+  font-size: 58px;
+  color: #fff;
+}
+
+.thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 30% 20%,
+    rgba(255, 255, 255, 0.25),
+    transparent 55%
+  );
+}
+
+.card .thumb {
+  transition: transform 0.5s var(--ease);
+}
+
+.card:hover .thumb {
+  transform: scale(1.03);
+}
+
+.g1 {
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+}
+
+.g2 {
+  background: linear-gradient(135deg, #f97316, #dc2626);
+}
+
+.g3 {
+  background: linear-gradient(135deg, #10b981, #047857);
+}
+
+.g4 {
+  background: linear-gradient(135deg, #8b5cf6, #4338ca);
+}
+
+.g5 {
+  background: linear-gradient(135deg, #64748b, #0f172a);
+}
+
+.g6 {
+  background: linear-gradient(135deg, #eab308, #f97316);
+}
+
+.card .body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 22px;
+}
+
+.card h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-bottom: 8px;
+
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.card p {
+  display: -webkit-box;
+  flex: 1;
+  overflow: hidden;
+
+  font-size: 14px;
+  color: var(--muted);
+
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+
+  margin: 16px 0 12px;
+  padding-top: 12px;
+
+  border-top: 1px dashed var(--line);
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 4px;
+
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    gap var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.more::after {
+  content: "›";
+  font-size: 18px;
+  line-height: 1;
+  transition: transform var(--transition-fast);
+}
+
+.more:hover {
+  color: var(--blue-dark);
+  gap: 7px;
+}
+
+.more:hover::after {
+  transform: translateX(2px);
+}
+
+.pad {
+  padding: 26px;
+}
+
+/* ---------- 11. Самбар, жагсаалт ---------- */
+.panel {
+  margin-bottom: 22px;
+  padding: 28px;
+
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.links li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  padding: 14px 8px;
+  border-bottom: 1px solid var(--line);
+  border-radius: 8px;
+
+  transition:
+    background var(--transition-fast),
+    padding-left var(--transition-fast);
+}
+
+.links li:last-child {
+  border-bottom: 0;
+}
+
+.links li:hover {
+  padding-left: 14px;
+  background: var(--bg-soft);
+}
+
+.links li::before {
+  content: "📄";
+  flex: none;
+}
+
+.links a {
+  color: var(--blue);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+
+  background: var(--blue-tint);
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.tag.warn {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+/* ---------- 12. Хүснэгт ---------- */
+table {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+
+  font-size: 15px;
+}
+
+th,
+td {
+  padding: 15px 18px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+
+th {
+  background: var(--soft);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+tr:last-child td {
+  border-bottom: 0;
+}
+
+tbody tr:hover td,
+tr:hover > td {
+  background: var(--bg-soft);
+}
+
+/* ---------- 13. Хүмүүсийн мэдээлэл ---------- */
+.people {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.person {
+  padding: 30px 22px;
+  text-align: center;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 16px;
+
+  border-radius: 50%;
+  font-size: 38px;
+  color: #fff;
+
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  box-shadow:
+    0 0 0 5px var(--blue-tint),
+    0 10px 20px rgba(37, 99, 235, 0.25);
+}
+
+.person p {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---------- 14. Цагийн шугам ---------- */
+.timeline {
+  margin-left: 6px;
+  padding-left: 26px;
+  border-left: 3px solid var(--line);
+}
+
+.timeline div {
+  position: relative;
+  margin-bottom: 22px;
+  padding: 16px 20px;
+
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.timeline div::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: -38px;
+
+  width: 14px;
+  height: 14px;
+
+  background: var(--blue);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--blue);
+}
+
+.timeline b {
+  font-size: 18px;
+  color: var(--blue);
+}
+
+/* ---------- 15. Үзүүлэлтийн зурвас ---------- */
+.bar {
+  height: 12px;
+  margin: 6px 0 18px;
+  overflow: hidden;
+
+  background: var(--soft);
+  border-radius: 99px;
+}
+
+.bar i {
+  display: block;
+  width: 0;
+  height: 100%;
+
+  background: linear-gradient(90deg, #2563eb, #0ea5e9);
+  border-radius: 99px;
+
+  transition: width 1.2s var(--ease);
+}
+
+/* ---------- 16. Хайлт ба маягт ---------- */
+.search {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 28px;
+  padding: 12px 18px 12px 44px;
+
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  outline: none;
+
+  font: inherit;
+  font-size: 14px;
+  color: var(--text);
+
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 16px center;
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.form label {
+  display: block;
+  margin: 16px 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form input,
+.form textarea,
+.form select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 14px;
+
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  outline: none;
+
+  font: inherit;
+  color: var(--text);
+  background-color: #fff;
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.form input,
+.form select {
+  min-height: 46px;
+}
+
+.form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.form input::placeholder,
+.form textarea::placeholder,
+.search::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+}
+
+.form select {
+  cursor: pointer;
+}
+
+.search:focus,
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+  border-color: var(--blue);
+  box-shadow: var(--focus-ring);
+}
+
+.form input:disabled,
+.form textarea:disabled,
+.form select:disabled {
+  cursor: not-allowed;
+  background: var(--soft);
+  opacity: 0.7;
+}
+
+.err {
+  min-height: 18px;
+  margin-top: 4px;
+  font-size: 13px;
+  color: #dc2626;
+}
+
+.ok {
+  display: none;
+  margin-top: 18px;
+  padding: 14px 18px;
+
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: var(--radius-sm);
+
+  color: #047857;
+  animation: pop 0.4s var(--ease);
+}
+
+/* ---------- 17. Анимац ---------- */
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- 18. Газрын зургийн хэсэг ---------- */
+.map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 280px;
+  margin-top: 0;
+
+  border: 1px solid #c7d2fe;
+  border-radius: var(--radius);
+
+  font-size: 18px;
+  color: #1e3a8a;
+
+  background:
+    linear-gradient(
+      rgba(37, 99, 235, 0.08) 1px,
+      transparent 1px
+    ) 0 0 / 32px 32px,
+    linear-gradient(
+      90deg,
+      rgba(37, 99, 235, 0.08) 1px,
+      transparent 1px
+    ) 0 0 / 32px 32px,
+    linear-gradient(135deg, #dbeafe, #e0e7ff);
+}
+
+/* ---------- 19. Мэдээний дэлгэрэнгүй ---------- */
+.article .thumb {
+  height: 340px;
+  margin-bottom: 26px;
+  border-radius: var(--radius);
+  font-size: 80px;
+}
+
+.article p {
+  margin-bottom: 18px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #1e293b;
+}
+
+/* ---------- 20. Footer ---------- */
+.footer {
+  padding: 56px 0 24px;
+
+  background: var(--navy);
+  color: #94a3b8;
+
+  font-size: 14px;
+}
+
+.fgrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.2fr;
+  gap: 40px;
+
+  padding-bottom: 32px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.footer h4 {
+  margin-bottom: 14px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.footer li {
+  margin-bottom: 8px;
+}
+
+.footer a {
+  overflow-wrap: anywhere;
+  transition:
+    color var(--transition-fast),
+    padding-left var(--transition-fast);
+}
+
+.footer a:hover {
+  color: #fff;
+}
+
+.footer li a:hover {
+  padding-left: 4px;
+}
+
+.fbottom {
+  padding-top: 22px;
+  text-align: center;
+}
+
+.fbottom nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 14px;
+}
+
+/* ---------- 21. Дээш гүйлгэх товч ---------- */
+#toTop {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 90;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  width: 46px;
+  height: 46px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--blue);
+  color: #fff;
+  font-size: 20px;
+
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast);
+}
+
+#toTop:hover {
+  background: var(--blue-dark);
+  transform: translateY(-3px);
+}
+
+#toTop:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.65);
+  outline-offset: 4px;
+}
+
+/* ---------- 22. Таблет болон жижиг компьютер ---------- */
+@media (max-width: 1024px) {
+  .grid,
+  .people {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nav > li > a {
+    padding-inline: 9px;
+    font-size: 13px;
+  }
+
+  .header .container {
+    gap: 12px;
+  }
+
+  .brand {
+    gap: 8px;
+    font-size: 15px;
+  }
+
+  .stats {
+    gap: 14px;
+  }
+
+  .fgrid {
+    gap: 28px;
+  }
+}
+
+/* ---------- 23. Гар утасны навигаци ---------- */
+@media (max-width: 900px) {
+  .header .container {
+    position: relative;
+  }
+
+  .burger {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  .header .btn {
+    display: none;
+  }
+
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 120;
+
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    padding: 12px 4% 18px;
+
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow-md);
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .nav > li {
+    width: 100%;
+  }
+
+  .nav > li > a {
+    justify-content: space-between;
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+
+  .sub {
+    position: static;
+    display: none;
+
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+
+    margin: 2px 0 6px;
+    padding: 6px;
+
+    background: var(--bg-soft);
+    border: 0;
+    border-radius: 10px;
+    box-shadow: none;
+
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    transition: none;
+  }
+
+  .sub::before {
+    display: none;
+  }
+
+  .has-sub.open .sub {
+    display: block;
+  }
+
+  .has-sub:hover .sub {
+    display: none;
+  }
+
+  .has-sub.open:hover .sub {
+    display: block;
+  }
+
+  .sub a {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .sub a:hover {
+    padding-left: 16px;
+  }
+
+  .hero {
+    padding: 72px 0 96px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fgrid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+/* ---------- 24. Гар утас ---------- */
+@media (max-width: 640px) {
+  :root {
+    --header-h: 62px;
+    --radius: 14px;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  .container {
+    width: 92%;
+  }
+
+  .header .container {
+    gap: 10px;
+  }
+
+  .brand {
+    min-width: 0;
+    gap: 8px;
+    font-size: 14px;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  .brand svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .burger {
+    width: 40px;
+    height: 40px;
+  }
+
+  main {
+    padding: 32px 0 56px;
+  }
+
+  h1 {
+    font-size: clamp(25px, 7vw, 32px);
+  }
+
+  h2 {
+    margin-top: 26px;
+    font-size: 20px;
+  }
+
+  .lead {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .hero {
+    padding: 56px 0 80px;
+  }
+
+  .hero h1 {
+    font-size: clamp(28px, 8vw, 38px);
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .hero .btn {
+    display: flex;
+    width: 100%;
+    min-height: 46px;
+  }
+
+  .hero .btn + .btn {
+    margin: 12px 0 0;
+  }
+
+  .stats {
+    gap: 10px;
+    margin-top: -36px;
+  }
+
+  .stat {
+    padding: 18px 10px;
+  }
+
+  .stat b {
+    font-size: 26px;
+  }
+
+  .stat span {
+    font-size: 12px;
+  }
+
+  .grid,
+  .grid.two,
+  .people {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .card .body {
+    padding: 18px;
+  }
+
+  .thumb {
+    height: 170px;
+  }
+
+  .pad {
+    padding: 20px;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+
+  .article .thumb {
+    height: 220px;
+  }
+
+  .article p {
+    font-size: 16px;
+  }
+
+  .search {
+    max-width: none;
+  }
+
+  .form input,
+  .form textarea,
+  .form select {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .map {
+    height: 230px;
+    font-size: 16px;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  th,
+  td {
+    padding: 12px;
+  }
+
+  .fgrid {
+    gap: 24px;
+    padding-bottom: 24px;
+  }
+
+  .fbottom nav {
+    gap: 12px 18px;
+  }
+
+  #toTop {
+    right: 14px;
+    bottom: 14px;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* ---------- 25. Маш жижиг дэлгэц ---------- */
+@media (max-width: 380px) {
+  .container {
+    width: 94%;
+  }
+
+  .brand {
+    font-size: 13px;
+  }
+
+  .stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stat {
+    padding: 16px;
+  }
+
+  .hero {
+    padding: 46px 0 70px;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .card .body {
+    padding: 16px;
+  }
+}
+
+/* ---------- 26. Хүртээмж ба хөдөлгөөний тохиргоо ---------- */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .card:hover,
+  .stat:hover,
+  .btn:hover,
+  #toTop:hover {
+    transform: none;
+  }
+}
+
+/* ---------- 27. Хэвлэх тохиргоо ---------- */
+@media print {
+  @page {
+    margin: 15mm;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .header,
+  .footer,
+  #toTop,
+  .btn,
+  .burger,
+  .nav,
+  .sub {
+    display: none !important;
+  }
+
+  main {
+    min-height: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  .container {
+    width: 100%;
+    max-width: none;
+  }
+
+  .card,
+  .panel,
+  .stat,
+  .timeline div {
+    box-shadow: none;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .grid,
+  .grid.two,
+  .people,
+  .stats {
+    gap: 12px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  img,
+  svg {
+    max-width: 100%;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: visible;
+  }
+
+  th,
+  td {
+    border: 1px solid #cbd5e1;
+  }
+
+  tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+/* ---------- Камерын лого (хулганыг дагана) ---------- */
+.brand img.logo-cam{
+  width:44px;height:44px;flex:none;border-radius:10px;object-fit:cover;
+  box-shadow:0 4px 12px rgba(15,23,42,.25);
+  transform:perspective(300px);will-change:transform;transition:box-shadow .2s;
+}
+.brand:hover img.logo-cam{box-shadow:0 6px 18px rgba(37,99,235,.45)}
+@media (max-width:640px){.brand img.logo-cam{width:38px;height:38px}}

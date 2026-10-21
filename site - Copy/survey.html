@@ -1,0 +1,149 @@
+```html
+<!DOCTYPE html>
+<html lang="mn">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Сэтгэл ханамжийн судалгаа | Теле камерын хяналтын дэд төв</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <header class="header">
+            <div class="container">
+                <a class="brand" href="index.html">
+                    <svg viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="18" fill="#eef2ff" stroke="#2563eb" stroke-width="2"/>
+                        <path d="M20 3l4 14 14 3-14 4-4 14-4-14-14-4 14-3z" fill="#2563eb" opacity=".85"/>
+                        <circle cx="20" cy="20" r="4" fill="#f97316"/>
+                    </svg>
+                    <span>Теле камерын хяналтын дэд төв</span>
+                </a>
+                <button class="burger" id="burger" aria-label="Цэс">☰</button>
+                <ul class="nav" id="nav">
+                    <li><a href="index.html" class="">Нүүр</a></li>
+                    <li class="has-sub">
+                        <a href="about.html" class="">Бидний тухай</a>
+                        <div class="sub">
+                            <a href="about.html">Танилцуулга</a>
+                            <a href="functions.html">Чиг үүрэг</a>
+                            <a href="management.html">Удирдлагын мэдээлэл</a>
+                        </div>
+                    </li>
+                    <li><a href="news.html" class="">Мэдээлэл</a></li>
+                    <li class="has-sub">
+                        <a href="laws-citizens.html" class="">Хууль тогтоомж</a>
+                        <div class="sub">
+                            <a href="laws-citizens.html">Иргэдэд үйлчлэх үйлчилгээнд мөрдөж буй хууль тогтоомж</a>
+                            <a href="laws-operations.html">Газрын үйл ажиллагаанд дагаж мөрдөж буй хууль тогтоомж</a>
+                            <a href="rules.html">Байгууллагын дүрэм, журам</a>
+                        </div>
+                    </li>
+                    <li class="has-sub">
+                        <a href="budget.html" class="active">Ил тод байдал</a>
+                        <div class="sub">
+                            <a href="budget.html">Төсөв санхүү</a>
+                            <a href="reports.html">Тайлан, мэдээ</a>
+                            <a href="survey.html">Сэтгэл ханамжийн судалгаа</a>
+                        </div>
+                    </li>
+                    <li><a href="contact.html" class="">Холбоо барих</a></li>
+                </ul>
+                <a class="btn" href="feedback.html">Санал хүсэлт</a>
+            </div>
+        </header>
+
+            <main>
+        <div class="container">
+            <div class="crumbs">
+                <a href="index.html">Нүүр</a> › Ил тод байдал › Сэтгэл ханамжийн судалгаа
+            </div>
+
+            <h1>Санал хүсэлт илгээх</h1>
+            <p class="lead">Таны санал, гомдол, хүсэлтийг хүлээн авч шийдвэрлэнэ.</p>
+
+            <div class="panel" style="max-width:640px">
+                <form class="form" id="feedbackForm" novalidate>
+                    <label>Нэр</label>
+                    <input type="text" required>
+                    <div class="err"></div>
+
+                    <label>И-мэйл</label>
+                    <input type="email" required>
+                    <div class="err"></div>
+
+                    <label>Утас</label>
+                    <input type="tel">
+
+                    <label>Санал хүсэлт</label>
+                    <textarea required></textarea>
+                    <div class="err"></div>
+                    <br>
+
+                    <button class="btn" type="submit">Илгээх</button>
+                    <div class="ok" id="okMsg">Таны санал хүсэлт амжилттай илгээгдлээ.</div>
+                </form>
+            </div>
+        </div>
+    </main>
+        <!--
+        <main>
+            <div class="container">
+                <div class="crumbs">
+                    <a href="index.html">Нүүр</a> › Ил тод байдал › Сэтгэл ханамжийн судалгаа
+                </div>
+                <h1>Сэтгэл ханамжийн судалгаа</h1>
+                <p class="lead">Байгууллагын үйл ажиллагаатай холбоотой иргэдийн сэтгэл ханамжийн судалгаа.</p>
+                <div class="panel">
+                    <form class="form" id="surveyForm">
+                        <label>Үйлчилгээнд хэр сэтгэл хангалуун байна вэ?</label>
+                        <select>
+                            <option>Маш сайн</option>
+                            <option>Сайн</option>
+                            <option>Дунд</option>
+                            <option>Муу</option>
+                        </select>
+                        <label>Нэмэлт санал</label>
+                        <textarea></textarea>
+                        <br>
+                        <br>
+                        <button class="btn" type="submit">Илгээх</button>
+                        <div class="ok" id="okMsg">Судалгаанд оролцсонд баярлалаа!</div>
+                    </form>
+                </div>
+            </div>
+        </main>-->
+
+        <footer class="footer">
+            <div class="container">
+                <div class="fgrid">
+                    <div>
+                        <h4>Теле камерын хяналтын дэд төв</h4>
+                        <p>Теле камер ашиглалт хэвийн ажиллагааг хангах чиг үүрэг бүхий төрийн үйлчилгээний байгууллага.</p>
+                    </div>
+                    <div>
+                        <h4>Холбоо барих</h4>
+                    <ul>
+                        <li>Утас: 7042-0406</li>
+                        <li>И-мэйл: bayanulgiidedtuv@gmail.com</li>
+                        <li>
+                            Хаяг: Баян Өлгий аймаг, Өлгий сум, 11-р баг, Төрийн үйлчилгээний нэгдсэн төвд
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+                <div class="fbottom">
+                    <nav>
+                        <a href="privacy.html">Нууцлалын бодлого</a>
+                        <a href="privacy.html">Үйлчилгээний нөхцөл</a>
+                        <a href="privacy.html">Өгөгдөл устгах</a>
+                    </nav>
+                    <p>© 2026 Теле камерын хяналтын дэд төв. Бүх эрх хуулиар хамгаалагдсан.</p>
+                </div>
+            </div>
+        </footer>
+
+        <button id="toTop" aria-label="Дээш">↑</button>
+        <script src="js/script.js"></script>
+    </body>
+</html>
+```
