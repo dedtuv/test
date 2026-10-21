@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Нүүр | Теле камерын хяналтын дэд төв</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <a class="brand" href="index.html">
+                <img class="logo-cam" src="images/camera.png" alt="Камер" width="44" height="44">
+                <span>Теле камерын хяналтын дэд төв</span>
+            </a>
+            <button class="burger" id="burger" aria-label="Цэс">☰</button>
+
+            <ul class="nav" id="nav">
+                <li><a href="index.html" class="active">Нүүр</a></li>
+
+                <li class="has-sub">
+                    <a href="about.html">Бидний тухай</a>
+                    <div class="sub">
+                        <a href="about.html">Танилцуулга</a>
+                        <a href="functions.html">Чиг үүрэг</a>
+                        <a href="management.html">Удирдлагын мэдээлэл</a>
+                    </div>
+                </li>
+                <li><a href="news.html">Мэдээлэл</a></li>
+                <li class="has-sub">
+                    <a href="laws-citizens.html">Хууль тогтоомж</a>
+                    <div class="sub">
+                        <a href="laws-citizens.html">Иргэдэд үйлчлэх үйлчилгээнд мөрдөж буй хууль тогтоомж</a>
+                        <a href="laws-operations.html">Газрын үйл ажиллагаанд дагаж мөрдөж буй хууль тогтоомж</a>
+                        <a href="rules.html">Байгууллагын дүрэм, журам</a>
+                    </div>
+                </li>
+
+                <li class="has-sub">
+                    <a href="budget.html">Ил тод байдал</a>
+                    <div class="sub">
+                        <a href="budget.html">Төсөв санхүү</a>
+                        <a href="reports.html">Тайлан, мэдээ</a>
+                        <a href="survey.html">Сэтгэл ханамжийн судалгаа</a>
+                    </div>
+                </li>
+
+                <li><a href="contact.html">Холбоо барих</a></li>
+            </ul>
+
+            <a class="btn" href="feedback.html">Санал хүсэлт</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Баян-Өлгий аймгийн аюулгүй байдал, хяналтын нэгдсэн төв</h1>
+            <p>
+                Теле камерын хяналтын дэд төв нь иргэдийн аюулгүй байдал,
+                замын хөдөлгөөний хяналт, ил тод үйлчилгээг 24 цагийн турш
+                хангаж ажиллана.
+            </p>
+            <a class="btn" href="about.html">Бидний тухай</a>
+            <a class="btn" href="contact.html">Холбоо барих</a>
+        </div>
+    </section>
+
+    <!--
+    <div class="container">
+        <div class="stats">
+            <div class="stat">
+                <b data-count="238">0</b>
+                <span>Нийт камер</span>
+            </div>
+
+            <div class="stat">
+                <b data-count="78">0</b>
+                <span>Хяналтын цэг</span>
+            </div>
+
+            <div class="stat">
+                <b data-count="24">0</b>
+                <span>Цагийн хяналт</span>
+            </div>
+
+            <div class="stat">
+                <b data-count="2015">0</b>
+                <span>Байгуулагдсан он</span>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <main>
+        <div class="container">
+            <h1>Сүүлийн мэдээ</h1>
+            <p class="lead">
+                Байгууллагын үйл ажиллагаа, мэдээ мэдээллийг эндээс харна уу.
+            </p>
+
+            <div class="grid">
+                <article class="card reveal">
+                    <div class="thumb g1">🎉</div>
+                    <div class="body">
+                        <h3>Ёлтын сав газар</h3>
+                        <p>
+                            Баян-Өлгий аймаг нь 1940 оны 8 дугаар сард
+                            БНМАУ-ын Бага Хурлын шийдвэрээр байгуулагдсан...
+                        </p>
+                        <div class="meta">
+                            <span>Админ</span>
+                            <span>2026.07.18</span>
+                        </div>
+                        <a class="more" href="news-detail.html">Цааш унших</a>
+                    </div>
+                </article>
+
+                <article class="card reveal">
+                    <div class="thumb g2">🎉</div>
+                    <div class="body">
+                        <h3>Үндэсний их баяр наадмын мэндчилгээ</h3>
+                        <p>
+                            Тулгар төрийн 2235 жил, Их Монгол Улс байгуулагдсаны
+                            820 жил, Үндэсний эрх чөлөө, тусгаар тогтнолоо
+                            сэргээн...
+                        </p>
+                        <div class="meta">
+                            <span>Админ</span>
+                            <span>2026.07.10</span>
+                        </div>
+                        <a class="more" href="news-detail.html">Цааш унших</a>
+                    </div>
+                </article>
+
+                <article class="card reveal">
+                    <div class="thumb g3">📡</div>
+                    <div class="body">
+                        <h3>2026 оны эхний хагас жилийн камержуулалтын ажил</h3>
+                        <p>
+                            Эрдэнэт хотын Теле камерын хяналтын дэд төвөөс
+                            2026 оны эхний хагас жилд нийт 1473 камер
+                            байршууллаа...
+                        </p>
+                        <div class="meta">
+                            <span>Админ</span>
+                            <span>2026.07.02</span>
+                        </div>
+                        <a class="more" href="news-detail.html">Цааш унших</a>
+                    </div>
+                </article>
+            </div>
+
+            <p style="text-align: center; margin-top: 28px;">
+                <a class="btn" href="news.html">Бүх мэдээ үзэх</a>
+            </p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="fgrid">
+                <div>
+                    <h4>Теле камерын хяналтын дэд төв</h4>
+                    <p>
+                        Теле камерын ашиглалт, хэвийн ажиллагааг хангах
+                        чиг үүрэг бүхий төрийн үйлчилгээний байгууллага.
+                    </p>
+                </div>
+                <div>
+                    <h4>Холбоо барих</h4>
+                    <ul>
+                        <li>Утас: 7042-0406</li>
+                        <li>И-мэйл: bayanulgiidedtuv@gmail.com</li>
+                        <li>
+                            Хаяг: Баян Өлгий аймаг, Өлгий сум, 11-р баг, Төрийн үйлчилгээний нэгдсэн төвд
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="fbottom">
+                <nav>
+                    <a href="privacy.html">Нууцлалын бодлого</a>
+                    <a href="privacy.html">Үйлчилгээний нөхцөл</a>
+                    <a href="privacy.html">Өгөгдөл устгах</a>
+                </nav>
+
+                <p>
+                    © 2026 Теле камерын хяналтын дэд төв.
+                    Бүх эрх хуулиар хамгаалагдсан.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="toTop" aria-label="Дээш">↑</button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
